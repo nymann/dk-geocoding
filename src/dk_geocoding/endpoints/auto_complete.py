@@ -29,6 +29,6 @@ class AutoComplete(GetEndpoint):
                     postal_code="8660",
                     address="Harevej 13, 8660 Skanderborg",
                     coordinates=Coordinates(lat=56.0387294, lon=9.9599287),
-                )
-            ]
+                ),
+            ],
         )
