@@ -3,6 +3,9 @@ from pogo_api.endpoint import Endpoint
 
 from dk_geocoding.core.config import Config
 from dk_geocoding.core.service_container import ServiceContainer
+from dk_geocoding.endpoints.auto_complete import AutoComplete
+from dk_geocoding.endpoints.geocoding import Geocoding
+from dk_geocoding.endpoints.reverse_geocoding import ReverseGeocoding
 
 
 class Api:
@@ -13,7 +16,7 @@ class Api:
 
     @property
     def endpoints(self) -> list[Endpoint]:
-        return []
+        return [Geocoding(), AutoComplete(), ReverseGeocoding()]
 
     def add_endpoints(self) -> None:
         for endpoint in self.endpoints:
