@@ -1,4 +1,4 @@
-DOCKER_REPO?=dk-geocoding
+DOCKER_REPO?=nymann/dk-geocoding
 DOCKER_TAG?=${DOCKER_REPO}:$(shell git describe --tag --always | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
 
 package: ${VERSION} setup.py
@@ -15,4 +15,4 @@ docker-push: ${VERSION}
 		-f docker/Dockerfile .
 	@docker push --all-tags ${DOCKER_REPO}
 
-.PHONY:docker-build docker-push package
+	.PHONY:docker-build docker-push packagthuge
