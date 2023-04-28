@@ -1,34 +1,17 @@
 from pogo_api.endpoint import GetEndpoint
-from pydantic import BaseModel
+
+from dk_geocoding.domain.dataforsygningen.service import Dataforsygningen
+from dk_geocoding.domain.dataforsygningen.service import Response
 
 
-class Coordinates(BaseModel):
-    lat: float
-    lon: float
+class Autocomplete(GetEndpoint):
+    def __init__(self, dataforsygningen: Dataforsygningen) -> None:
+        self.dataforsygning = dataforsygningen
+        super().__init__()
 
-
-class Address(BaseModel):
-    postal_code: str
-    address: str
-    coordinates: Coordinates
-
-
-class Response(BaseModel):
-    addresses: list[Address]
-
-
-class AutoComplete(GetEndpoint):
     @property
     def path(self) -> str:
-        return "/auto-complete"
+        return "/autocomplete"
 
     def endpoint(self, query: str) -> Response:
-        return Response(
-            addresses=[
-                Address(
-                    postal_code="8660",
-                    address="Harevej 13, 8660 Skanderborg",
-                    coordinates=Coordinates(lat=56.0387294, lon=9.9599287),
-                ),
-            ],
-        )
+        return self.dataforsygning.autocomplete(query=query)
