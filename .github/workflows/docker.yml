@@ -24,7 +24,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            nymann/dk-analyzer-api
+            nymann/dk-geocoding
           tags: |
             type=ref,event=branch
             type=ref,event=pr
