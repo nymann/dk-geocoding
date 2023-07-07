@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pogo_api.endpoint import Endpoint
 
 from dk_geocoding.core.config import Config
@@ -23,3 +24,12 @@ class Api:
     def add_endpoints(self) -> None:
         for endpoint in self.endpoints:
             endpoint.route.add_to_router(self.api)
+
+    def _middleware(self) -> None:
+        self.api.add_middleware(
+            CORSMiddleware,
+            allow_origins=["*"],
+            allow_credentials=True,
+            allow_methods=["*"],
+            allow_headers=["*"],
+        )
