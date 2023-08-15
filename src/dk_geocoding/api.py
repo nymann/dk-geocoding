@@ -13,6 +13,7 @@ class Api:
         self.api = FastAPI(version=config.version, title=config.title, docs_url="/")
         self.services = service_container
         self.add_endpoints()
+        self._middleware()
 
     @property
     def endpoints(self) -> list[Endpoint]:

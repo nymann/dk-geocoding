@@ -8,4 +8,4 @@ FROM nymann/debian-python3:$DEBIAN_VERSION
 EXPOSE 80
 USER $USERNAME
 COPY --from=compile-image --chown=$USERNAME:$USERNAME "$VENV" "$VENV"
-CMD uvicorn dk_geocoding.asgi:api --port 80 --host 0.0.0.0
+CMD uvicorn dk_geocoding.asgi:api --workers 2 --port 80 --host 0.0.0.0
